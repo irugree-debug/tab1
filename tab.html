@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DELTA PROJECT</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: rgba(0,0,0,0);
+      color: #fff;
+    }
+
+    .tab {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 860px;
+      background: rgba(15, 16, 20, 0.94);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .online {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .online span {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 14px 22px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+    }
+
+    tbody tr {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      transition: 0.2s;
+    }
+
+    tbody tr:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    td {
+      padding: 14px 22px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .id, .level, .ping {
+      width: 110px;
+      color: #fff;
+    }
+
+    .nick {
+      font-weight: 600;
+    }
+
+    .footer {
+      padding: 12px 22px 16px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tab">
+    <div class="top">
+      <div>
+        <div class="title">DELTA PROJECT</div>
+        <div class="sub">Player List</div>
+      </div>
+      <div class="online">Online: <span id="onlineCount">0</span></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:110px;">ID</th>
+          <th>Nick</th>
+          <th style="width:110px;">Level</th>
+          <th style="width:110px;">Ping</th>
+        </tr>
+      </thead>
+      <tbody id="playersBody"></tbody>
+    </table>
+
+    <div class="footer">DELTA PROJECT · TAB MENU</div>
+  </div>
+
+  <script>
+    function renderPlayers(list) {
+      const body = document.getElementById("playersBody");
+      const onlineCount = document.getElementById("onlineCount");
+      body.innerHTML = "";
+      onlineCount.textContent = list.length;
+
+      list.forEach(player => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td class="id">${player.id}</td>
+          <td class="nick">${player.nick}</td>
+          <td class="level">${player.level}</td>
+          <td class="ping">${player.ping} ms</td>
+        `;
+        body.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
